@@ -6,13 +6,14 @@ export const useTodoStore = defineStore("todo", {
   state: () => ({
     list: [],
     selectedTodo: {},
-    status: ["Pending", "Doing", "Done"],
+    statuses: ["Pending", "Doing", "Done"],
   }),
   actions: {
     async loadTodos() {
       try {
-        const response = await axios.get(`${BASE_UR}/todos`)
+        const response = await axios.get(`${BASE_URL}/todos`)
         this.list = response.data
+        console.log("Load TodoList Success")
       } catch (error) {
         console.log("Error", error)
       }
@@ -21,17 +22,18 @@ export const useTodoStore = defineStore("todo", {
       try {
         const response = await axios.get(`${BASE_URL}/todos/${id}`)
         this.selectedTodo = response.data
+        console.log("Load Todo by ID Success")
       } catch (error) {
         console.log("Error", error)
       }
     },
     async addTodo(todoText) {
       const bodyData = {
-        name: "todoText",
+        name: todoText,
         status: "Pending",
       }
       try {
-        const response = await axios.post(`${BASE_URL}/todos/${id}`, bodyData)
+        const response = await axios.post(`${BASE_URL}/todos`, bodyData)
         console.log("Add todo completed")
       } catch (error) {
         console.log("Error", error)
