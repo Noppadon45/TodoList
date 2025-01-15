@@ -10,13 +10,11 @@ const router = createRouter({
       name: "todo-list",
       component: HomeView,
     },
+
     {
       path: "/todo/:id/edit",
       name: "todo-edit",
       component: EditView,
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
     },
   ],
 })
